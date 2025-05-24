@@ -4,7 +4,8 @@ import { FiSearch, FiBell, FiPlus, FiMenu, FiUser, FiSettings, FiLogOut, FiFileT
 import { fadeIn, slideUp, springIn, modalContent } from '../../animations';
 
 const Header = ({ onMenuClick }) => {
-  const [showNewMenu, setShowNewMenu] = useState(false);
+  const [showDesktopNewMenu, setShowDesktopNewMenu] = useState(false);
+  const [showMobileNewMenu, setShowMobileNewMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const newMenuRef = useRef(null);
   const mobileNewMenuRef = useRef(null);
@@ -20,14 +21,14 @@ const Header = ({ onMenuClick }) => {
       if (newMenuRef.current && newButtonRef.current && 
           !newMenuRef.current.contains(event.target) && 
           !newButtonRef.current.contains(event.target)) {
-        setShowNewMenu(false);
+        setShowDesktopNewMenu(false);
       }
       
       // Close mobile new menu when clicking outside
       if (mobileNewMenuRef.current && mobileNewButtonRef.current && 
           !mobileNewMenuRef.current.contains(event.target) && 
           !mobileNewButtonRef.current.contains(event.target)) {
-        setShowNewMenu(false);
+        setShowMobileNewMenu(false);
       }
       
       // Close profile menu when clicking outside
@@ -45,7 +46,8 @@ const Header = ({ onMenuClick }) => {
   }, []);
   
   // Toggle menus
-  const toggleNewMenu = () => setShowNewMenu(!showNewMenu);
+  const toggleDesktopNewMenu = () => setShowDesktopNewMenu(!showDesktopNewMenu);
+  const toggleMobileNewMenu = () => setShowMobileNewMenu(!showMobileNewMenu);
   const toggleProfileMenu = () => setShowProfileMenu(!showProfileMenu);
   
   return (
@@ -106,7 +108,7 @@ const Header = ({ onMenuClick }) => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            onClick={toggleNewMenu}
+            onClick={toggleDesktopNewMenu}
           >
             <FiPlus className="w-5 h-5" />
             <span className="ml-1 text-sm font-medium hidden md:inline">New</span>
@@ -115,7 +117,7 @@ const Header = ({ onMenuClick }) => {
           
           {/* New popup menu */}
           <AnimatePresence>
-            {showNewMenu && (
+            {showDesktopNewMenu && (
               <motion.div
                 ref={newMenuRef}
                 className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20 border border-gray-100"
@@ -176,14 +178,14 @@ const Header = ({ onMenuClick }) => {
             ref={mobileNewButtonRef}
             className="p-2 text-gray-500 hover:text-primary focus:outline-none"
             whileTap={{ scale: 0.9 }}
-            onClick={toggleNewMenu}
+            onClick={toggleMobileNewMenu}
           >
             <FiPlus className="w-5 h-5" />
           </motion.button>
           
           {/* Mobile New popup menu */}
           <AnimatePresence>
-            {showNewMenu && (
+            {showMobileNewMenu && (
               <motion.div
                 ref={mobileNewMenuRef}
                 className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20 border border-gray-100"

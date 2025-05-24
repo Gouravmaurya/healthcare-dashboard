@@ -156,30 +156,7 @@ const AnatomyStatus = () => {
                 );
               })}
               
-              {/* Tooltip */}
-              {hoveredPart && (
-                <div 
-                  className="absolute bg-white shadow-lg rounded-lg p-3 text-sm z-10 pointer-events-none transition-all duration-200"
-                  style={{
-                    left: `${tooltipPosition.x}px`,
-                    top: `${tooltipPosition.y}px`,
-                    transform: 'translate(-50%, -120%)',
-                    minWidth: '160px',
-                    maxWidth: '200px'
-                  }}
-                >
-                  <div className="font-semibold text-gray-800 flex items-center">
-                    <span className={`w-2 h-2 rounded-full mr-2 ${getStatusClass(getPartDetails(hoveredPart)?.status)}`}></span>
-                    {hoveredPart}
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Status: {getPartDetails(hoveredPart)?.status}
-                  </div>
-                  <div className="text-xs text-gray-600 mt-1">
-                    {getPartDetails(hoveredPart)?.details}
-                  </div>
-                </div>
-              )}
+              {/* Tooltip - Removed as per request */}
               
               {/* Details Box in Bottom Left */}
               <div className="absolute bottom-4 left-4 bg-white/95 shadow-lg rounded-lg p-4 w-64 border border-gray-200 transition-all duration-300 ease-in-out"
